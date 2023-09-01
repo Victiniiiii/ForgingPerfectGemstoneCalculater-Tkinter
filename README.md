@@ -5,3 +5,5 @@ TODO:
 - add automaton parts to the sapphire gemstone calculation
 - make a 5x setting to show the max forge profit possibility
 - profit per day but needs user to enter the quick forge hotm skill level
+- darker tones of red and green according to the profit
+- add profit option for flawless gems
