@@ -7,3 +7,4 @@ TODO:
 - profit per day but needs user to enter the quick forge hotm skill level
 - darker tones of red and green according to the profit
 - add profit option for flawless gems
+- options for buy order and sell order
