@@ -10,25 +10,20 @@ response_API = requests.get('https://api.hypixel.net/skyblock/bazaar')
 data = response_API.text
 parse_json = json.loads(data)
 
-# Create the main window
 root = tk.Tk()
 root.title("Forging Profit Calculator")
 root.geometry("1200x900")
-root.resizable(False, False)  # Prevent resizing of the app
+root.resizable(False, False)
 root.config(bg="black")
 
-# Create a style for dark mode
 style = ttk.Style()
 style.theme_use('clam')
 style.configure("TNotebook", background="black")
 style.configure("TNotebook.Tab", background="black", foreground="black", font=("Verdana", 10, "bold"))
 style.configure("TFrame", background="black")
 style.configure("TLabel", background="black", foreground="white")
-
-# Define the font style and size for the gemstone names
 font_style = ("Verdana", 14, "bold")
 
-# All the data of gemstones
 FineJade = parse_json['products']['FINE_JADE_GEM']['quick_status']['sellPrice']
 PerfectJade = parse_json['products']['PERFECT_JADE_GEM']['quick_status']['sellPrice']
 FineJade400 = FineJade * 400
@@ -91,7 +86,6 @@ def exit_app():
     if root is not None:
         root.destroy()
 
-# Bazaar API status box
 response = requests.get("https://api.hypixel.net/skyblock/bazaar")
 if response.status_code == 200:
     border_frame = tk.Frame(bg="green", width=30, height=5)
@@ -104,14 +98,11 @@ else:
     bazaar_api_label = tk.Label(border_frame, text="Failed to access\nBazaar API.\nError code: {response.status_code}", fg="white", font=("Verdana", 20, "bold"), bg="white")
     bazaar_api_label.pack()
 
-# Create the Exit button
 exit_button = tk.Button(text="Exit", bg="white", width=30, height=5, command=exit_app)
 exit_button.grid(row=4, column=2, padx=100, pady=0, sticky="nsew")
 
-# Create image placeholders and text placeholders in the Gemstone Merging tab
 image_file_paths = []
 
-# Download and save the image from the URL
 ruby_image_path = "jade_gem.png"
 urllib.request.urlretrieve("https://static.wikia.nocookie.net/hypixel-skyblock/images/7/7b/Fine_Jade_Gemstone.png/revision/latest?cb=20210706152109", ruby_image_path)
 image_file_paths.append(os.path.abspath(ruby_image_path))
@@ -148,23 +139,20 @@ for i, image_file_path in enumerate(image_file_paths):
     image_placeholder = ImageTk.PhotoImage(resized_image)
     image_label = tk.Label(image=image_placeholder)
     image_label.grid(row=i, column=0, padx=10, pady=10)
-    image_label.image = image_placeholder  # Store a reference to the image to prevent it from being garbage collected
+    image_label.image = image_placeholder
 
-# Create the text placeholder with the modified font style and size
     text_placeholders = []
     for i, gemstone_name in enumerate(gemstone_names):
         text_placeholder = tk.Label(bg="white", width=50, height=3, padx=3, pady=1, font=font_style)
-        text_placeholder.grid(row=i, column=1, padx=10, pady=1, sticky="nsew")  # Set sticky parameter to "nsew"
-        text_placeholders.append(text_placeholder)  # Store the text placeholder in a list
+        text_placeholder.grid(row=i, column=1, padx=10, pady=1, sticky="nsew") 
+        text_placeholders.append(text_placeholder)
 
 
 def update_text():
-    # Update the text placeholders based on the values of JadeProfit, AmberProfit, etc.
     for i, gemstone_name in enumerate(gemstone_names):
-        text_placeholder = text_placeholders[i]  # Get the corresponding text placeholder
+        text_placeholder = text_placeholders[i]
 
         if i == 0:
-            # Change the text color of jadesentence based on JadeProfit value
             if JadeProfit > 1000000:
                 text_placeholder.config(text=jadesentence, fg="green")
             elif JadeProfit > 0:
@@ -172,7 +160,6 @@ def update_text():
             else:
                 text_placeholder.config(text=jadesentence, fg="red")
         elif i == 1:
-            # Change the text color of ambersentence based on AmberProfit value
             if AmberProfit > 1000000:
                 text_placeholder.config(text=ambersentence, fg="green")
             elif AmberProfit > 0:
@@ -180,7 +167,6 @@ def update_text():
             else:
                 text_placeholder.config(text=ambersentence, fg="red")
         elif i == 2:
-            # Change the text color of topazsentence based on TopazProfit value
             if TopazProfit > 1000000:
                 text_placeholder.config(text=topazsentence, fg="green")
             elif TopazProfit > 0:
@@ -188,7 +174,6 @@ def update_text():
             else:
                 text_placeholder.config(text=topazsentence, fg="red")
         elif i == 3:
-            # Change the text color of sapphiresentence based on SapphireProfit value
             if SapphireProfit > 1000000:
                 text_placeholder.config(text=sapphiresentence, fg="green")
             elif SapphireProfit > 0:
@@ -196,7 +181,6 @@ def update_text():
             else:
                 text_placeholder.config(text=sapphiresentence, fg="red")
         elif i == 4:
-            # Change the text color of amethystsentence based on AmethystProfit value
             if AmethystProfit > 1000000:
                 text_placeholder.config(text=amethystsentence, fg="green")
             elif AmethystProfit > 0:
@@ -204,7 +188,6 @@ def update_text():
             else:
                 text_placeholder.config(text=amethystsentence, fg="red")
         elif i == 5:
-            # Change the text color of jaspersentence based on JasperProfit value
             if JasperProfit > 1000000:
                 text_placeholder.config(text=jaspersentence, fg="green")
             elif JasperProfit > 0:
@@ -212,7 +195,6 @@ def update_text():
             else:
                 text_placeholder.config(text=jaspersentence, fg="red")
         elif i == 6:
-            # Change the text color of rubysentence based on RubyProfit value
             if RubyProfit > 1000000:
                 text_placeholder.config(text=rubysentence, fg="green")
             elif RubyProfit > 0:
@@ -220,7 +202,6 @@ def update_text():
             else:
                 text_placeholder.config(text=rubysentence, fg="red")
         elif i == 7:
-            # Change the text color of opalsentence based on OpalProfit value
             if OpalProfit > 1000000:
                 text_placeholder.config(text=opalsentence, fg="green")
             elif OpalProfit > 0:
@@ -228,8 +209,6 @@ def update_text():
             else:
                 text_placeholder.config(text=opalsentence, fg="red")
 
-# Schedule the initial update
 update_text()
 
-# Run the application
 root.mainloop()
